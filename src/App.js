@@ -17,6 +17,8 @@ function App() {
         let responseData = res.data.items.map((i) => {
           return {
             title: i.fields.title,
+            desc: i.fields.description,
+            url: i.fields.url,
           };
         });
         setData(responseData);
@@ -31,17 +33,17 @@ function App() {
     getData();
   }, []);
   return (
-    <>
+    <div className="main-wrapper">
       {data.length > 0 &&
         data.map((item, index) => (
-          <BlogCard title={item.title} fontSize={inputValue} key={index} />
+          <BlogCard
+            title={item.title}
+            src={item.url}
+            desc={item.desc}
+            key={index}
+          />
         ))}
-      <div style={{ fontSize: Number(inputValue) }}>Kite {inputValue}</div>
-      <input
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-    </>
+    </div>
   );
 }
 
